@@ -1,0 +1,43 @@
+### Start mysqld, log in as root, use the correct db, and describe it:
+
+Joels-MacBook-Pro-2:PHP-Email-Reminder joel$ sudo mysqld_safe 
+Password:
+140523 07:43:57 mysqld_safe Logging to '/usr/local/mysql/data/Joels-MacBook-Pro-2.local.err'.
+140523 07:43:57 mysqld_safe Starting mysqld daemon with databases from /usr/local/mysql/data
+
+Joels-MacBook-Pro-2:PHP-Email-Reminder joel$ mysql --user=root
+
+
+mysql> use test;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> dest test;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dest test' at line 1
+mysql> show tables;
++----------------+
+| Tables_in_test |
++----------------+
+| client_contact |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> desc client_contact;
++--------------+--------------+------+-----+-------------------+-------+
+| Field        | Type         | Null | Key | Default           | Extra |
++--------------+--------------+------+-----+-------------------+-------+
+| email_addr   | varchar(128) | NO   |     |                   |       |
+| date_added   | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| action_step1 | text         | YES  |     | NULL              |       |
+| action_step2 | text         | YES  |     | NULL              |       |
+| action_step3 | text         | YES  |     | NULL              |       |
++--------------+--------------+------+-----+-------------------+-------+
+5 rows in set (0.01 sec)
+
+
+### Create the user who will connect:
+
+
+grant all privileges on test.* to 'contactor'@'localhost' identified by '7sdfa3w8';
+
