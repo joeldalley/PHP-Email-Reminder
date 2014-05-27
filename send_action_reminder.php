@@ -38,7 +38,7 @@ $which_step = count($argv) > 1
             ? (integer) $argv[1] : 1;              // Legit? Or default to 1.
 
 // Translate the integer number (1, 2 or 3) into a column name.
-$step_col_name = "action_step$which_step";
+$step_col_name = 'action_step' . $which_step;
 $step_date_col = $step_col_name . '_date_sent';
 
 // Each reminder goes out two days after the last, so calculate:
