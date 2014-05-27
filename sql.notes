@@ -24,20 +24,22 @@ mysql> show tables;
 1 row in set (0.00 sec)
 
 mysql> desc client_contact;
-+--------------+--------------+------+-----+-------------------+-------+
-| Field        | Type         | Null | Key | Default           | Extra |
-+--------------+--------------+------+-----+-------------------+-------+
-| email_addr   | varchar(128) | NO   |     |                   |       |
-| date_added   | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
-| action_step1 | text         | YES  |     | NULL              |       |
-| action_step2 | text         | YES  |     | NULL              |       |
-| action_step3 | text         | YES  |     | NULL              |       |
-+--------------+--------------+------+-----+-------------------+-------+
-5 rows in set (0.01 sec)
++------------------------+--------------+------+-----+---------------------+-------+
+| Field                  | Type         | Null | Key | Default             | Extra |
++------------------------+--------------+------+-----+---------------------+-------+
+| email_addr             | varchar(128) | NO   |     |                     |       |
+| date_added             | timestamp    | NO   |     | CURRENT_TIMESTAMP   |       |
+| action_step1           | text         | YES  |     | NULL                |       |
+| action_step1_date_sent | timestamp    | NO   |     | 0000-00-00 00:00:00 |       |
+| action_step2           | text         | YES  |     | NULL                |       |
+| action_step2_date_sent | timestamp    | NO   |     | 0000-00-00 00:00:00 |       |
+| action_step3           | text         | YES  |     | NULL                |       |
+| action_step3_date_sent | timestamp    | NO   |     | 0000-00-00 00:00:00 |       |
++------------------------+--------------+------+-----+---------------------+-------+
+8 rows in set (0.01 sec)
 
 
 ### Create the user who will connect:
 
 
 grant all privileges on test.* to 'contactor'@'localhost' identified by '7sdfa3w8';
-

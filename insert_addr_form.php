@@ -6,8 +6,8 @@ A super simple, modal PHP point-of-contact script.
 If given no "mode" parameter, then a form is displayed.
 If given the correct "mode" parameter value, form input is processed.
 
-This is not meant to be a professionally written program, but is
-instead just meant for educational purposes. Which is why it's so bare.
+This is not meant to be a professionally written program, 
+but is instead just meant for educational purposes.
 
 @author Joel Dalley
 @version 2014/May/23
