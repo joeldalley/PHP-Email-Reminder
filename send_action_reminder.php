@@ -19,6 +19,11 @@ date_default_timezone_set('America/Denver');
 // How long in between each action step reminder.
 define(INTERVAL, 86400*2); // 2 days, in seconds.
 
+// Change these to match your actual address(es):
+define(SENT_FROM_ADDR, 'nobody@no.where');
+define(REPLY_TO_ADDR, 'nobody@no.where');
+
+
 // Get command line argument; default to step 1.
 //
 // (This is probably overkill for a learning exercise, but I want to
@@ -60,9 +65,12 @@ while ($row = $select_res->fetch_array()) {
 
     // Send the email, and print out that this happened. (Another approach
     // instead of printing,  would be to blind carbon-copy yourself.)
+    $headers = 'From: ' . SENT_FROM_ADDR . "\r\n" 
+             . 'Reply-To: ' . REPLY_TO_ADDR . "\r\n";
     mail($addr,                                           // Mail-to address.
          "Action Step Reminder - Step $which_step",       // Subject.
-         "Your action step for today: $step_col_value."); // Body.
+         "Your action step for today: $step_col_value.",  // Body.
+         $headers);                                       // Additional headers.
     echo "Sent message to `$addr`, for action step `$which_step`,",
          " which was `$step_col_value`\n";
 
