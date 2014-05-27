@@ -48,6 +48,7 @@ $query = "SELECT email_addr,$step_col_name FROM client_contact"
 $link = new mysqli('localhost', 'contactor', '7sdfa3w8', 'test');
 $res = $link->query($query);
 
+// Iterate over rows & send email.
 while ($row = $res->fetch_array()) {
     list($addr, $step) = $row;
 
