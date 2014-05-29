@@ -42,7 +42,7 @@ $step_col_name = 'action_step' . $which_step;
 $step_date_col = $step_col_name . '_date_sent';
 
 // Each reminder goes out two days after the last, so calculate:
-$when = time() - $which_step * INTERVAL;
+$step_interval = $which_step * INTERVAL;
 
 // Query to select only the action steps matching the 
 // given number, that haven't already been sent out.
@@ -50,7 +50,7 @@ $when = time() - $which_step * INTERVAL;
 //       but for now, we stick to UNIX epochs.
 $select_query = "SELECT email_addr,$step_col_name,date_added FROM client_contact"
               . " WHERE $step_date_col=0"
-              . "   AND UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP($when) "
+              . "   AND UNIX_TIMESTAMP(NOW()) - $step_interval "
               . "       >= UNIX_TIMESTAMP(date_added)";
 
 // Select matching rows.
