@@ -184,3 +184,10 @@ Joels-MacBook-Pro-2:Documents joel$ ln -s ~/Code/PHP-Email-Reminder/insert_addr_
 ### URL:
 
 http://localhost/form.php
+
+
+### Symbolically link date_picker.html into the doc root:
+
+Joels-MacBook-Pro-2:Documents joel$ pwd
+/Library/WebServer/Documents
+Joels-MacBook-Pro-2:Documents joel$ ln -s ~/Code/PHP-Email-Reminder/date_picker.html .
