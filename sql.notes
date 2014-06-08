@@ -41,5 +41,11 @@ mysql> desc client_contact;
 
 ### Create the user who will connect:
 
-
 grant all privileges on test.* to 'contactor'@'localhost' identified by '7sdfa3w8';
+
+
+### Update table to have a 'target_date' column:
+
+mysql> alter table client_contact add column target_date date not null default '0000-00-00' after email_addr;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0

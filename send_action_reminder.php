@@ -9,6 +9,7 @@ instead just meant for educational purposes.
 
 @author Joel Dalley
 @version 2014/May/27
+@version 2014/Jun/08 -- Update to use a user-specified target date.
 
 */
 
@@ -17,7 +18,9 @@ instead just meant for educational purposes.
 date_default_timezone_set('America/Denver');
 
 // How long in between each action step reminder.
-define(INTERVAL, 86400*2); // 2 days, in seconds.
+// define(INTERVAL, 86400*2); // 2 days, in seconds.
+// Interval is no longer constant -- it's now a function 
+// of the target date. - Joel 2014/Jun/08
 
 // Change these to match your actual address(es):
 define(SENT_FROM_ADDR, 'nobody@no.where');
@@ -41,17 +44,17 @@ $which_step = count($argv) > 1
 $step_col_name = 'action_step' . $which_step;
 $step_date_col = $step_col_name . '_date_sent';
 
-// Each reminder goes out two days after the last, so calculate:
-$step_interval = $which_step * INTERVAL;
-
 // Query to select only the action steps matching the 
 // given number, that haven't already been sent out.
 // NOTE: the date math can probably be done differently, 
 //       but for now, we stick to UNIX epochs.
-$select_query = "SELECT email_addr,$step_col_name,date_added FROM client_contact"
+$select_query = "SELECT email_addr,$step_col_name,date_added,"
+              . "       (UNIX_TIMESTAMP(target_date) - "
+              . "        UNIX_TIMESTAMP(date_added))/(4*86400) AS interval_size"
+              . " FROM client_contact"
               . " WHERE $step_date_col=0"
-              . "   AND UNIX_TIMESTAMP(NOW()) - $step_interval "
-              . "       >= UNIX_TIMESTAMP(date_added)";
+              . " HAVING UNIX_TIMESTAMP(NOW()) >= "
+              . "        UNIX_TIMESTAMP(date_added) + interval_size*$which_step*86400";
 
 // Select matching rows.
 $link = new mysqli('localhost', 'contactor', '7sdfa3w8', 'test');
