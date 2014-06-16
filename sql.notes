@@ -23,6 +23,24 @@ mysql> show tables;
 +----------------+
 1 row in set (0.00 sec)
 
+
+### Show create table
+
+CREATE TABLE `client_contact` (
+  `email_addr` varchar(128) NOT NULL DEFAULT '',
+  `target_date` date NOT NULL DEFAULT '0000-00-00',
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `action_step1` text,
+  `action_step1_date_sent` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `action_step2` text,
+  `action_step2_date_sent` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `action_step3` text,
+  `action_step3_date_sent` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+
+### Describe table
+
 mysql> desc client_contact;
 +------------------------+--------------+------+-----+---------------------+-------+
 | Field                  | Type         | Null | Key | Default             | Extra |
